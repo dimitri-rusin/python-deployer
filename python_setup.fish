@@ -20,7 +20,12 @@ cd $project_dir
 git init
 
 # Copy specified files from the source directory to the current directory
-cp ~/Softwareentwicklung/setup/.template/{.BUILD,.conda.yaml,.gitignore,.pip.txt,.RUN,.workstory.md} ./
+cp ~/Softwareentwicklung/setup/template_scripts/BUILD ./.BUILD
+cp ~/Softwareentwicklung/setup/template_scripts/conda.yaml ./.conda.yaml
+cp ~/Softwareentwicklung/setup/template_scripts/gitignore ./.gitignore
+cp ~/Softwareentwicklung/setup/template_scripts/pip.txt ./.pip.txt
+cp ~/Softwareentwicklung/setup/template_scripts/RUN ./.RUN
+cp ~/Softwareentwicklung/setup/template_scripts/workstory.md ./.workstory.md
 
 # Grant execute permissions to the .BUILD and .RUN files
 chmod u+x ./.BUILD ./.RUN
