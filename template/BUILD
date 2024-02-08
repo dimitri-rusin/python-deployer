@@ -7,3 +7,6 @@ and rm -rf build/
 and conda env create --prefix ./.conda_environment/ --file .conda.yaml
 and conda activate ./.conda_environment/
 and pip install --requirement .pip.txt
+
+# and conda env config vars list
+# and conda env update --file .conda.yaml --prune
