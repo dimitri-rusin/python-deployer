@@ -8,7 +8,7 @@ if test (count $argv) -eq 0
 end
 
 # Define the new project directory path
-set project_dir /home/dimitri/code/$argv[1]
+set project_dir $HOME/code/$argv[1]
 
 # Create the new project directory
 mkdir $project_dir
@@ -19,19 +19,21 @@ cd $project_dir
 # Initialize Git repository
 git init
 
+mkdir .deploy/
+
 # Copy specified files from the source directory to the current directory
-cp ~/Softwareentwicklung/setup/template_scripts/BUILD ./.BUILD
-cp ~/Softwareentwicklung/setup/template_scripts/conda.yaml ./.conda.yaml
-cp ~/Softwareentwicklung/setup/template_scripts/gitignore ./.gitignore
-cp ~/Softwareentwicklung/setup/template_scripts/pip.txt ./.pip.txt
-cp ~/Softwareentwicklung/setup/template_scripts/RUN ./.RUN
-cp ~/Softwareentwicklung/setup/template_scripts/workstory.md ./.workstory.md
+cp $HOME/code/deploy/BUILD .deploy/BUILD
+cp $HOME/code/deploy/conda.yaml .deploy/conda.yaml
+cp $HOME/code/deploy/gitignore .gitignore
+cp $HOME/code/deploy/pip.txt .deploy/pip.txt
+cp $HOME/code/deploy/RUN .deploy/RUN
+cp $HOME/code/deploy/workstory.md .deploy/workstory.md
 
 # Grant execute permissions to the .BUILD and .RUN files
-chmod u+x ./.BUILD ./.RUN
+chmod u+x .deploy/BUILD .deploy/RUN
 
 # Create a new Sublime Text project file
-set project_file "/home/dimitri/Softwareentwicklung/Sublime Text Projects/$argv[1].sublime-project"
+set project_file "$HOME/Softwareentwicklung/Sublime Text Projects/$argv[1].sublime-project"
 
 # Write the project file content
 echo '{
