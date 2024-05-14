@@ -28,6 +28,7 @@ cp $HOME/code/deploy/gitignore .gitignore
 cp $HOME/code/deploy/pip.txt .deploy/pip.txt
 cp $HOME/code/deploy/RUN .deploy/RUN
 cp $HOME/code/deploy/workstory.md .deploy/workstory.md
+cp $HOME/code/deploy/align_pip.py .deploy/align_pip.py
 
 # Grant execute permissions to the .BUILD and .RUN files
 chmod u+x .deploy/BUILD .deploy/RUN
