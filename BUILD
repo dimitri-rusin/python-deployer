@@ -3,37 +3,40 @@
 # Exit immediately on errors, treat unset variables as an error, and fail on error in any pipeline
 set -euo pipefail
 
+# Customizing the PS4 variable to show expanded variables
+export PS4='+ \e[36m${BASH_SOURCE}:${LINENO}: ${FUNCNAME[0]:+${FUNCNAME[0]}(): }$ \e[m'
 
-
-# Attempt to initialize Conda in a Bash shell
-
-# Find the path to the conda executable
-conda_path=$(which conda)
-
-# Determine the path to conda.sh based on the conda executable location
-if [[ "$conda_path" == */condabin/conda ]]; then
-  conda_sh_path="${conda_path%/condabin/conda}/etc/profile.d/conda.sh"
-elif [[ "$conda_path" == */bin/conda ]]; then
-  conda_sh_path="${conda_path%/bin/conda}/etc/profile.d/conda.sh"
-else
-  echo "Error: Unable to locate the conda.sh file."
-  exit 1
+# Enable debugging if the last argument is --verbose
+if [[ "${@: -1}" == "--verbose" ]]; then
+  set -x
+  set -- "${@:1:$(($#-1))}"  # Remove the last argument (--verbose)
 fi
-
-# Source conda.sh if it exists, else export PATH
-if [ -f "$conda_sh_path" ]; then
-  echo "Sourcing: $conda_sh_path"
-  source "$conda_sh_path"
-else
-  echo "Exporting PATH with Conda bin directory"
-  export PATH="${conda_path%/bin/conda}/bin:$PATH"
-fi
-
 
 
 # Initialize and update git submodules
-git submodule init
-git submodule update
+if [ -d .git ]; then
+  git submodule init
+  git submodule update
+fi
+
+
+# Define the directory for local Miniconda installation
+MINICONDA_DIR=".deploy/miniconda"
+
+# Clean up any previous Conda environment and build targets
+rm -rf .deploy/conda_environment/
+rm -rf $MINICONDA_DIR
+
+# Install Miniconda locally
+curl -o /tmp/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-py39_24.5.0-0-Linux-x86_64.sh
+bash /tmp/miniconda.sh -b -p $MINICONDA_DIR
+rm /tmp/miniconda.sh
+
+# Initialize conda in the current shell (without modifying any shell configuration files)
+eval "$(.deploy/miniconda/bin/conda shell.bash hook)"
+
+
+
 
 # Activate the base Conda environment
 conda activate base

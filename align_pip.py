@@ -15,7 +15,7 @@ def main(file_path):
   with open(file_path, 'r') as file:
     lines = file.readlines()
 
-  output_lines = []
+  package_versions = {}
   for line in lines:
     line = line.strip()
     if not line:
@@ -28,9 +28,13 @@ def main(file_path):
 
     installed_version = get_installed_version(package_name)
     if installed_version:
-      output_lines.append(f"{package_name}=={installed_version}\n")
+      package_versions[package_name] = f"{package_name}=={installed_version}\n"
     else:
-      output_lines.append(f"{package_name} is not installed\n")
+      package_versions[package_name] = f"{package_name} is not installed\n"
+
+  sorted_packages = sorted(package_versions.keys())
+
+  output_lines = [package_versions[package] for package in sorted_packages]
 
   with open(file_path, 'w') as file:
     file.writelines(output_lines)

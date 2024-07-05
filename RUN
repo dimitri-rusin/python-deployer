@@ -3,26 +3,19 @@
 # Exit immediately on errors, treat unset variables as an error, and fail on error in any pipeline
 set -euo pipefail
 
+# Customizing the PS4 variable to show expanded variables
+export PS4='+ \e[36m${BASH_SOURCE}:${LINENO}: ${FUNCNAME[0]:+${FUNCNAME[0]}(): }$ \e[m'
 
-
-# Dynamically find the Conda executable path
-conda_path=$(which conda)
-
-# Determine the correct path for conda.sh based on the location of the conda executable
-if [[ "$conda_path" == */condabin/conda ]]; then
-  conda_sh_path="${conda_path%/condabin/conda}/etc/profile.d/conda.sh"
-elif [[ "$conda_path" == */bin/conda ]]; then
-  conda_sh_path="${conda_path%/bin/conda}/etc/profile.d/conda.sh"
-else
-  echo "Error: Unable to locate the conda.sh file."
-  exit 1
+# Enable debugging if the last argument is --verbose
+if [[ "${@: -1}" == "--verbose" ]]; then
+  set -x
+  set -- "${@:1:$(($#-1))}"  # Remove the last argument (--verbose)
 fi
 
-echo "Sourcing: $conda_sh_path"
-# Source the conda.sh script for proper initialization
-source "$conda_sh_path"
+eval "$(.deploy/miniconda/bin/conda shell.bash hook)"
+# which conda
+conda activate .deploy/conda_environment/
 
 
 
-conda activate .deploy/conda_environment
 python start.py
