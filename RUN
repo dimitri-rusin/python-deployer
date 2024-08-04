@@ -12,7 +12,7 @@ if [[ "${@: -1}" == "--verbose" ]]; then
   set -- "${@:1:$(($#-1))}"  # Remove the last argument (--verbose)
 fi
 
-eval "$(.deploy/miniconda/bin/conda shell.bash hook)"
+eval "$(.deploy/Miniconda3/bin/conda shell.bash hook)"
 # which conda
 conda activate .deploy/conda_environment/
 
