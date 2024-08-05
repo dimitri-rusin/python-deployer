@@ -1,30 +1,39 @@
-#!/usr/bin/fish
+#!/usr/bin/env bash
 
 # Check if no arguments were passed to the script
-if test (count $argv) -eq 0
+if [ $# -eq 0 ]; then
   # Display error message and exit if no arguments are given
   echo "Error: No directory name provided."
   exit 1
-end
+fi
 
 # Define the new project directory path
-set project_dir $HOME/code/$argv[1]
+project_basename="$1"
+project_dir=$(realpath "$project_basename")
+project_dir_basename=$(basename "$project_dir")
 
-# Create the new project directory
-mkdir $project_dir
+# Create extra folder:
+if [ ! -d "$project_dir" ]; then
 
-# Change into the newly created directory
-cd $project_dir
+  project_dir="$HOME/code/$project_basename"
 
-# Initialize Git repository
-git init
+  # Create the new project directory
+  mkdir $project_dir
+
+  # Change into the newly created directory
+  cd $project_dir
+
+  # Initialize Git repository
+  git init
+else
+  cd "$project_dir"
+fi
 
 mkdir .deploy/
 
 # Copy specified files from the source directory to the current directory
 cp $HOME/code/deploy/BUILD .deploy/BUILD
 cp $HOME/code/deploy/conda.yaml .deploy/conda.yaml
-cp $HOME/code/deploy/gitignore .gitignore
 cp $HOME/code/deploy/pip.txt .deploy/pip.txt
 cp $HOME/code/deploy/RUN .deploy/RUN
 cp $HOME/code/deploy/workstory.md .deploy/workstory.md
@@ -33,8 +42,10 @@ cp $HOME/code/deploy/align_pip.py .deploy/align_pip.py
 # Grant execute permissions to the .BUILD and .RUN files
 chmod u+x .deploy/BUILD .deploy/RUN
 
+[ ! -f .gitignore ] && cp $HOME/code/deploy/gitignore .gitignore
+
 # Create a new Sublime Text project file
-set project_file "$HOME/Softwareentwicklung/Sublime Text Projects/$argv[1].sublime-project"
+project_file="$HOME/Softwareentwicklung/Sublime Text Projects/$project_dir_basename.sublime-project"
 
 # Write the project file content
 echo '{
@@ -44,6 +55,6 @@ echo '{
       "path": "'$project_dir'"
     }
   ]
-}' > $project_file
+}' > "$project_file"
 
-subl $project_file
+subl "$project_file"

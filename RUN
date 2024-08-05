@@ -13,9 +13,12 @@ if [[ "${@: -1}" == "--verbose" ]]; then
 fi
 
 eval "$(.deploy/Miniconda3/bin/conda shell.bash hook)"
-# which conda
 conda activate .deploy/conda_environment/
 
+# A one-liner for the FISH shell:
+# eval .deploy/Miniconda3/bin/conda "shell.fish" "hook" | source; and conda activate .deploy/conda_environment/
 
 
-python start.py
+
+# Modify the path to a Python script that is the entry script to your project:
+# python start.py
