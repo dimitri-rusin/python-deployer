@@ -55,3 +55,17 @@ conda activate .deploy/conda_environment/
 Forgot your Python package version? Just run `python .deploy/align_pip.py` and current package versions will be written into the `pip.txt`.
 
 GO NUTS!! :)
+
+# More features
+
+You can also do
+```sh
+./deploy/BUILD --verbose
+```
+This will get you a lot of information about what's going on during the installation of the Python binary and packages.
+
+
+Or:
+```sh
+./deploy/RUN --verbose
+```

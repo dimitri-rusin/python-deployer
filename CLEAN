@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+MINICONDA_DIR=".deploy/Miniconda3"
+
+# Clean up any previous Conda environment and build targets
+rm -rf .deploy/conda_environment/
+rm -rf $MINICONDA_DIR
