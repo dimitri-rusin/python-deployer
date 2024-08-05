@@ -3,10 +3,6 @@
 # Get the directory of the script
 DEPLOY_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 
-echo $DEPLOY_DIR
-echo $DEPLOY_DIR
-echo $DEPLOY_DIR
-
 # Check if no arguments were passed to the script
 if [ $# -eq 0 ]; then
   # Display error message and exit if no arguments are given
@@ -21,8 +17,6 @@ project_dir_basename=$(basename "$project_dir")
 
 # Create extra folder:
 if [ ! -d "$project_dir" ]; then
-
-  project_dir="$HOME/code/$project_basename"
 
   # Create the new project directory
   mkdir $project_dir
@@ -56,18 +50,22 @@ chmod u+x .deploy/BUILD .deploy/RUN
 
 [ ! -f .gitignore ] && cp $DEPLOY_DIR/gitignore .gitignore
 
-# Determine the first Sublime Text project path
-first_project_file=$(find ~ -type f -name "*.sublime-project" 2>/dev/null | head -n 1)
-project_file=$(dirname "$first_project_file")/"$project_dir_basename.sublime-project"
+# If you use Sublime Text, also add this directory to the list of `Quick Switch Project` projects.
+if command -v subl &> /dev/null
+then
+  # Determine the first Sublime Text project path
+  first_project_file=$(find ~ -type f -name "*.sublime-project" 2>/dev/null | head -n 1)
+  project_file=$(dirname "$first_project_file")/"$project_dir_basename.sublime-project"
 
-# Write the project file content
-echo '{
-  "folders":
-  [
-    {
-      "path": "'$project_dir'"
-    }
-  ]
-}' > "$project_file"
+  # Write the project file content
+  echo '{
+    "folders":
+    [
+      {
+        "path": "'$project_dir'"
+      }
+    ]
+  }' > "$project_file"
 
-subl "$project_file"
+  subl "$project_file"
+fi
