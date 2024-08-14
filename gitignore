@@ -1,2 +1,2 @@
-.deploy/conda_environment/
-.deploy/Miniconda3/
+.python/venv/
+.python/Miniconda3/

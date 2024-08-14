@@ -35,24 +35,24 @@ cd pyfilm
 # This is the magic command that manages a Python environment for you
 ../deploy/ISOLATE .
 
-# Adapt .deploy/pip.txt
+# Adapt .python/pip.txt
 ./deploy/BUILD
 # Adapt ./deploy/RUN
 ./deploy/RUN
 ```
 
 The Python environment that you create with `../deploy/ISOLATE .` consists of:
-- Miniconda3 that lets you adapt your Python version, just go to the file `.deploy/conda.yaml`
+- Miniconda3 that lets you adapt your Python version, just go to the file `.python/conda.yaml`
 - A `pip.txt` file, where you can adapt your Python packages and their versions.
-- Everything is completely contained within a repo-private `.deploy` folder, just download all the Python packages again for another GitHub repo (so they can have different versions of `numpy` etc.)
+- Everything is completely contained within a repo-private `.python` folder, just download all the Python packages again for another GitHub repo (so they can have different versions of `numpy` etc.)
 
 You have downloaded a fresh Miniconda3 binary just for this GitHub repo. If you want to activate the repo using this Miniconda3 binary, if you use bash, go:
 ```sh
-eval "$(.deploy/Miniconda3/bin/conda shell.bash hook)"
-conda activate .deploy/conda_environment/
+eval "$(.python/Miniconda3/bin/conda shell.bash hook)"
+conda activate .python/venv/
 ```
 
-Forgot your Python package version? Just run `python .deploy/align_pip.py` and current package versions will be written into the `pip.txt`.
+Forgot your Python package version? Just run `python .python/align_pip.py` and current package versions will be written into the `pip.txt`.
 
 GO NUTS!! :)
 

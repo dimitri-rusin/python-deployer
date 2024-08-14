@@ -2,6 +2,7 @@
 
 # Get the directory of the script
 DEPLOY_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+SUBLIME_TEXT_PROJECTS_PATH="$HOME/code/Sublime Text Projects"
 
 # Check if no arguments were passed to the script
 if [ $# -eq 0 ]; then
@@ -30,23 +31,25 @@ else
   cd "$project_dir"
 fi
 
-if [ -d ".deploy" ]; then
-  echo ".deploy directory already exists. Exiting."
+if [ -d ".python" ]; then
+  echo ".python directory already exists. Exiting."
   exit 1
 fi
 
-mkdir .deploy/
+mkdir .python/
 
 # Copy specified files from the source directory to the current directory
-cp $DEPLOY_DIR/BUILD .deploy/BUILD
-cp $DEPLOY_DIR/conda.yaml .deploy/conda.yaml
-cp $DEPLOY_DIR/pip.txt .deploy/pip.txt
-cp $DEPLOY_DIR/RUN .deploy/RUN
-cp $DEPLOY_DIR/workstory.md .deploy/workstory.md
-cp $DEPLOY_DIR/align_pip.py .deploy/align_pip.py
+cp $DEPLOY_DIR/ALIGN_PIP .python/ALIGN_PIP
+cp $DEPLOY_DIR/align_pip.py .python/align_pip.py
+cp $DEPLOY_DIR/BUILD .python/BUILD
+cp $DEPLOY_DIR/CLEAN .python/CLEAN
+cp $DEPLOY_DIR/conda.yaml .python/conda.yaml
+cp $DEPLOY_DIR/pip.txt .python/pip.txt
+cp $DEPLOY_DIR/RUN .python/RUN
+cp $DEPLOY_DIR/workstory.md .python/workstory.md
 
 # Grant execute permissions to the .BUILD and .RUN files
-chmod u+x .deploy/BUILD .deploy/RUN
+chmod u+x .python/BUILD .python/RUN
 
 [ ! -f .gitignore ] && cp $DEPLOY_DIR/gitignore .gitignore
 
@@ -54,7 +57,7 @@ chmod u+x .deploy/BUILD .deploy/RUN
 if command -v subl &> /dev/null
 then
   # Determine the first Sublime Text project path
-  first_project_file=$(find ~ -type f -name "*.sublime-project" 2>/dev/null | head -n 1)
+  first_project_file=$(find "$SUBLIME_TEXT_PROJECTS_PATH" -type f -name "*.sublime-project" 2>/dev/null | head -n 1)
   project_file=$(dirname "$first_project_file")/"$project_dir_basename.sublime-project"
 
   # Write the project file content
