@@ -39,6 +39,8 @@ fi
 mkdir .python/
 
 # Copy specified files from the source directory to the current directory
+cp $PYTHON_DEPLOYER_DIR/ACTIVATE_BASH .python/ACTIVATE_BASH
+cp $PYTHON_DEPLOYER_DIR/ACTIVATE_FISH .python/ACTIVATE_FISH
 cp $PYTHON_DEPLOYER_DIR/ALIGN_PIP .python/ALIGN_PIP
 cp $PYTHON_DEPLOYER_DIR/align_pip.py .python/align_pip.py
 cp $PYTHON_DEPLOYER_DIR/BUILD .python/BUILD

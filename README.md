@@ -33,7 +33,7 @@ git clone https://github.com/ferdinandvanwyk/pyfilm # this can be any other GitH
 cd pyfilm
 
 # This is the magic command that manages a Python environment for you
-../python-deployer/DEPLOY1 .
+../python-deployer/DEPLOY .
 
 # Adapt .python/pip.txt
 .python/BUILD

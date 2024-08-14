@@ -1,0 +1,7 @@
+#!/usr/bin/env fish
+
+# Initialize Conda for Fish shell
+.python/Miniconda3/bin/conda "shell.fish" "hook" | source
+
+# Activate the Conda environment
+and conda activate .python/venv/

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Initialize Conda for Fish shell
+eval "$(.python/Miniconda3/bin/conda shell.bash hook)"
+
+# Activate the Conda environment
+conda activate .python/venv/
