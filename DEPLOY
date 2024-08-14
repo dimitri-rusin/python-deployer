@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Get the directory of the script
-DEPLOY_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+PYTHON_DEPLOYER_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 SUBLIME_TEXT_PROJECTS_PATH="$HOME/code/Sublime Text Projects"
 
 # Check if no arguments were passed to the script
@@ -39,19 +39,21 @@ fi
 mkdir .python/
 
 # Copy specified files from the source directory to the current directory
-cp $DEPLOY_DIR/ALIGN_PIP .python/ALIGN_PIP
-cp $DEPLOY_DIR/align_pip.py .python/align_pip.py
-cp $DEPLOY_DIR/BUILD .python/BUILD
-cp $DEPLOY_DIR/CLEAN .python/CLEAN
-cp $DEPLOY_DIR/conda.yaml .python/conda.yaml
-cp $DEPLOY_DIR/pip.txt .python/pip.txt
-cp $DEPLOY_DIR/RUN .python/RUN
-cp $DEPLOY_DIR/workstory.md .python/workstory.md
+cp $PYTHON_DEPLOYER_DIR/ALIGN_PIP .python/ALIGN_PIP
+cp $PYTHON_DEPLOYER_DIR/align_pip.py .python/align_pip.py
+cp $PYTHON_DEPLOYER_DIR/BUILD .python/BUILD
+cp $PYTHON_DEPLOYER_DIR/CLEAN .python/CLEAN
+cp $PYTHON_DEPLOYER_DIR/conda.yaml .python/conda.yaml
+cp $PYTHON_DEPLOYER_DIR/pip.txt .python/pip.txt
+cp $PYTHON_DEPLOYER_DIR/RUN .python/RUN
+cp $PYTHON_DEPLOYER_DIR/workstory.md .python/workstory.md
+
+[ ! -f .gitignore ] && cp $PYTHON_DEPLOYER_DIR/gitignore .gitignore
 
 # Grant execute permissions to the .BUILD and .RUN files
 chmod u+x .python/BUILD .python/RUN
 
-[ ! -f .gitignore ] && cp $DEPLOY_DIR/gitignore .gitignore
+
 
 # If you use Sublime Text, also add this directory to the list of `Quick Switch Project` projects.
 if command -v subl &> /dev/null
