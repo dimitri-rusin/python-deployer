@@ -42,7 +42,7 @@ cd pyfilm
 ```
 
 The Python environment that you create with `../python-deployer/DEPLOY .` consists of:
-- Miniconda3 that lets you adapt your Python version, just go to the file `.python/conda.yaml`
+- Miniconda3 that lets you adapt your Python version, just go to the file `.python/Miniconda3.yaml`
 - A `pip.txt` file, where you can adapt your Python packages and their versions.
 - Everything is completely contained within a repo-private `.python` folder, just download all the Python packages again for another GitHub repo (so they can have different versions of `numpy` etc.)
 

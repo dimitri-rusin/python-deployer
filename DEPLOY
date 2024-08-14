@@ -45,7 +45,7 @@ cp $PYTHON_DEPLOYER_DIR/ALIGN_PIP .python/ALIGN_PIP
 cp $PYTHON_DEPLOYER_DIR/align_pip.py .python/align_pip.py
 cp $PYTHON_DEPLOYER_DIR/BUILD .python/BUILD
 cp $PYTHON_DEPLOYER_DIR/CLEAN .python/CLEAN
-cp $PYTHON_DEPLOYER_DIR/conda.yaml .python/conda.yaml
+cp $PYTHON_DEPLOYER_DIR/Miniconda3.yaml .python/Miniconda3.yaml
 cp $PYTHON_DEPLOYER_DIR/pip.txt .python/pip.txt
 cp $PYTHON_DEPLOYER_DIR/RUN .python/RUN
 cp $PYTHON_DEPLOYER_DIR/workstory.md .python/workstory.md

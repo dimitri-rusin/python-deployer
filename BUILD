@@ -45,12 +45,12 @@ rm /tmp/Miniconda3.sh
 # Initialize conda in the current shell (without modifying any shell configuration files)
 eval "$(.python/Miniconda3/bin/conda shell.bash hook)"
 
-# Create and activate a new Conda environment based on .python/conda.yaml configuration
-conda env create --prefix .python/venv/ --file .python/conda.yaml
+# Create and activate a new Conda environment based on .python/Miniconda3.yaml configuration
+conda env create --prefix .python/venv/ --file .python/Miniconda3.yaml
 conda activate .python/venv/
 
 # Install Python dependencies from the requirements file
 pip install --requirement .python/pip.txt
 
 # conda env config vars list
-# conda env update --file .python/conda.yaml --prune
+# conda env update --file .python/Miniconda3.yaml --prune
