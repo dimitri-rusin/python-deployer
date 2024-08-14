@@ -1,5 +1,11 @@
 #!/usr/bin/env fish
 
+# Check if the Miniconda3 directory exists
+if not test -d ".python/Miniconda3"
+  echo "Found no Miniconda3 folder. First run:\n.python/BUILD"
+  exit 1
+end
+
 # Initialize Conda for Fish shell
 .python/Miniconda3/bin/conda "shell.fish" "hook" | source
 
