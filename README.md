@@ -46,10 +46,10 @@ The Python environment that you create with `../python-deployer/DEPLOY .` consis
 - A `pip.txt` file, where you can adapt your Python packages and their versions.
 - Everything is completely contained within a repo-private `.python` folder, just download all the Python packages again for another GitHub repo (so they can have different versions of `numpy` etc.)
 
-You have downloaded a fresh Miniconda3 binary just for this GitHub repo. If you want to activate the repo using this Miniconda3 binary, if you use bash, go:
+You have downloaded a fresh Miniconda3 binary just for this GitHub repo. If you want to activate the repo using this Miniconda3 binary, go:
 ```sh
-eval "$(.python/Miniconda3/bin/conda shell.bash hook)"
-conda activate .python/venv/
+source .python/ACTIVATE_BASH # if you use bash
+source .python/ACTIVATE_FISH # for those awesome folks knowing how to fish!
 ```
 
 Forgot your Python package version? Just run `python .python/align_pip.py` and current package versions will be written into the `pip.txt`.
