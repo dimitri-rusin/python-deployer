@@ -1,5 +1,7 @@
-import sys
+def b(): import ipdb; ipdb.set_trace()
 import argparse
+import subprocess
+import sys
 try:
   import importlib.metadata as importlib_metadata # in Python 3.8 and later
 except ImportError:
@@ -27,10 +29,17 @@ def main(file_path):
       package_name = line
 
     installed_version = get_installed_version(package_name)
-    if installed_version:
-      package_versions[package_name] = f"{package_name}=={installed_version}\n"
-    else:
-      package_versions[package_name] = f"{package_name} is not installed\n"
+    if not installed_version:
+      subprocess.check_call([
+        sys.executable,
+        "-m",
+        "pip",
+        "install",
+        package_name,
+      ])
+      installed_version = get_installed_version(package_name)
+
+    package_versions[package_name] = f"{package_name}=={installed_version}\n"
 
   sorted_packages = sorted(package_versions.keys())
 
