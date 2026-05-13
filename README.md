@@ -52,7 +52,7 @@ source .python/ACTIVATE_BASH # if you use bash
 source .python/ACTIVATE_FISH # for those awesome folks knowing how to fish!
 ```
 
-Forgot your Python package version? Just run `python .python/align_pip.py` and current package versions will be written into the `pip.txt`.
+Forgot your Python package version? Just run `python .python/update.py` and current package versions will be written into the `pip.txt`. This command will also install packages in the pip.txt file that are not installed yet.
 
 GO NUTS!! :)
 
